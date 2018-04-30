@@ -9,6 +9,8 @@ def boards_post():
 
 @kanban.route('/boards', methods=['GET'])
 def boards_get():
+  pass
 
 @kanban.route('/boards', methods=['DELETE'])
 def boards_delete():
+  pass
