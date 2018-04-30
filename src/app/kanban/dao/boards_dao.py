@@ -27,8 +27,8 @@ def create_board(board_title):
   return board
 
 
-  def all_boards():
-    """
-    Get all boards in table
-    """
-    return Board.query.all()
+def all_boards():
+  """
+  Get all boards in table
+  """
+  return Board.query.all()
