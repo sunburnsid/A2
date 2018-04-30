@@ -24,7 +24,6 @@ def create_board(board_title):
   except Exception as e:
     db.session.rollback() # rollback the session if there was an exception
     return e
-  return board
 
 
 def all_boards():

@@ -5,6 +5,7 @@ from flask import jsonify
 @kanban.route('/boards', methods=['POST'])
 def boards_post():
   board = boards_dao.create_board(request.args.get('board_title'))
+  print(board)
   dump_data = board_schema.dump(board).data
   print(dump_data)
   return jsonify({
