@@ -9,7 +9,7 @@ def boards_post():
   return jsonify({
     'success':True,
     'data': {
-      'board':dump_data}
+      'board':dump_data
     }
   })
 
