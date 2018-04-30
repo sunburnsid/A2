@@ -6,6 +6,7 @@ from flask import jsonify
 def boards_post():
   board = boards_dao.create_board(request.args.get('board_title'))
   dump_data = board_schema.dump(board).data
+  print(dump_data)
   return jsonify({
     'success':True,
     'data': {
@@ -19,6 +20,7 @@ def boards_get():
   content = []
   for board in boards:
     content.append(board_schema.dump(board).data)
+  print(content)
   return jsonify({
     'success':True,
     'data': {
