@@ -17,6 +17,7 @@ def create_board(board_title):
   Create a board with board_title as title
   """
   board = Board(title=board_title) # create instance of the board
+  print('Inserting board: ', board)
   db.session.add(board) # add it to the current session
   try:
     db.session.commit() # push this session to the DB
