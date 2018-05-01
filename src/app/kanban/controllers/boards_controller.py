@@ -2,14 +2,14 @@ from app.constants import *
 from . import *
 from flask import jsonify
 
+def count_elements(board):
+  pass
+
 @kanban.route('/boards', methods=['POST'])
 def boards_post():
   title = request.args.get('title')
-  print('New title: ', title)
   board = boards_dao.create_board(title)
-  print(board)
   dump_data = board_schema.dump(board).data
-  print(dump_data)
   return jsonify({
     'success':True,
     'data': {
@@ -33,5 +33,4 @@ def boards_get():
 
 @kanban.route('/boards', methods=['DELETE'])
 def boards_delete():
-  print("OR IS IT ME")
   pass
