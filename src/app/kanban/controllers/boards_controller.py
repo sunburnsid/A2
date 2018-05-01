@@ -7,8 +7,8 @@ def count_elements(board):
 
 @kanban.route('/boards', methods=['POST'])
 def boards_post():
-  board_title = request.args.get('board_title')
-  board = boards_dao.create_board()
+  title = request.args.get('title')
+  board = boards_dao.create_board(title)
   dump_data = board_schema.dump(board).data
   return jsonify({
     'success':True,
