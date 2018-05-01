@@ -4,7 +4,7 @@ class Board(Base):
   __tablename__ = 'boards'
   id             = db.Column(db.Integer, primary_key=True)
   title          = db.Column(db.String(256), unique=True, nullable=False)
-  board_elements = db.relationship('BoardElement')
+  #board_elements = db.relationship('Element')
 
   def __init__(self, **kwargs):
     """
