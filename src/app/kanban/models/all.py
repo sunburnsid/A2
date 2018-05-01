@@ -6,3 +6,8 @@ from marshmallow_sqlalchemy import field_for
 class BoardSchema(ModelSchema):
   class Meta(ModelSchema.Meta):
     model = Board
+
+
+class ElementSchema(ModelSchema):
+  class Meta(ModelSchema.Meta):
+    model = Element
