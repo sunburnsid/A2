@@ -36,4 +36,11 @@ def delete_board(board_id):
   Deletes board
   """
   board = Board.query.filter_by(id=board_id).first()
-  return Board.delete(board)
+  print('BOARD: ', board_id)
+  db.session.delete(board)
+  try:
+    db.session.commit() # push this session to the DB
+    return True
+  except Exception as e:
+    db.session.rollback() # rollback the session if there was an exception
+    return e
