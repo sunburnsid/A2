@@ -61,6 +61,7 @@ def boards_create_element():
   board_id = request.args.get('board_id')
   description = request.args.get('description')
   category = request.args.get('category')
+  print('Creating new element', board_id, description, category)
   element = boards_dao.create_element(board_id, description, category)
   element = element_schema.dump(element).data
   element['tags'] = []
