@@ -56,3 +56,13 @@ def create_element(board_id, description, category):
   except Exception as e:
     db.session.rollback() # rollback the session if there was an exception
     return e
+
+def delete_element(element_id):
+  element = Element.query.filter_by(id=element_id).first()
+  db.session.delete(element)
+  try:
+    db.session.commit() # push this session to the DB
+    return True
+  except Exception as e:
+    db.session.rollback() # rollback the session if there was an exception
+    return e
