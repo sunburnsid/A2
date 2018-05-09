@@ -33,7 +33,11 @@ def boards_get():
 
 @kanban.route('/boards', methods=['DELETE'])
 def boards_delete():
-  pass
+  board_id = request.args.get('board_id')
+  boards_dao.delete_board(board_id)
+  return jsonify({
+    'success':True
+  })
 
 @kanban.route('/boards/<board_id>', methods=['GET'])
 def boards_get_by_id(board_id):

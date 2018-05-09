@@ -11,7 +11,6 @@ def board_by_id(board_id):
   """
   return Board.query.filter_by(id=board_id).first()
 
-
 def create_board(board_title):
   """
   Create a board with board_title as title
@@ -26,9 +25,15 @@ def create_board(board_title):
     db.session.rollback() # rollback the session if there was an exception
     return e
 
-
 def all_boards():
   """
   Get all boards in table
   """
   return Board.query.all()
+
+def delete_board(board_id):
+  """
+  Deletes board
+  """
+  board = Board.query.filter_by(id=board_id).first()
+  return Board.delete(board)
