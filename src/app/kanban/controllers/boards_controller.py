@@ -74,3 +74,4 @@ def boards_create_element():
 
 @kanban.route('/board_elements', methods=['DELETE'])
 def boards_delete_element():
+  pass
