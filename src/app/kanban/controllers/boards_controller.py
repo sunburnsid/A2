@@ -71,3 +71,6 @@ def boards_create_element():
       'board_element':element
     }
   })
+
+@kanban.route('/board_elements', methods=['DELETE'])
+def boards_delete_element():
