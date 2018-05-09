@@ -76,7 +76,7 @@ def boards_create_element():
 @kanban.route('/board_elements', methods=['DELETE'])
 def boards_delete_element():
   element_id = request.args.get('board_element_id')
-  baords_dao.delete_element(element_id)
+  boards_dao.delete_element(element_id)
   return jsonify({
     'success':True
   })
