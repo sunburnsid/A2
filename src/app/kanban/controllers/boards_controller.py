@@ -48,6 +48,7 @@ def boards_get_by_id(board_id):
   board['done'] = []
   for e in board['board_elements']:
     print(element_schema.dump(e).data)
+  del board['board_elements']
   return jsonify({
     'success':True,
     'data': {

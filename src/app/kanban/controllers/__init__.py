@@ -10,6 +10,7 @@ from app.kanban.dao import boards_dao
 
 # Serializers
 board_schema         = BoardSchema()
+element_schema       = ElementSchema()
 
 # Blueprint
 from app.kanban import kanban
