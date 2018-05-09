@@ -54,3 +54,18 @@ def boards_get_by_id(board_id):
       'board':board
     }
   })
+
+@kanban.route('/board_elements', methods=['POST'])
+def boards_create_element():
+  board_id = request.args.get('board_id')
+  description = request.args.get('description')
+  category = request.args.get('category')
+  element = boards_dao.create_element(board_id, description, category)
+  element = element_schema.dump(element).data
+  element['tags'] = []
+  return jsonify({
+    'success':True,
+    'data': {
+      'board_element':element
+    }
+  })
