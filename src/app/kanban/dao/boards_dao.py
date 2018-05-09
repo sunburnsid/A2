@@ -47,13 +47,7 @@ def delete_board(board_id):
 
 def create_element(board_id, description, category):
   element = Element(board_id = board_id, description = description, category = category)
-  db.session.add(element) # add it to the current session
-  try:
-    db.session.commit() # push this session to the DB
-  except Exception as e:
-    db.session.rollback() # rollback the session if there was an exception
-    return e
-  
+  db.session.add(element) # add it to the current session  
   board = Board.query.filter_by(id=board_id).first()
   board.board_elements.append(element)
   board.updated_at = db.func.current_timestamp()
