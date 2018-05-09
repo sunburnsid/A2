@@ -35,10 +35,15 @@ def boards_get():
 def boards_delete():
   pass
 
-@kanban.route('/board/<board_id>', methods=['GET'])
+@kanban.route('/boards/<board_id>', methods=['GET'])
 def boards_get_by_id(board_id):
   board = boards_dao.board_by_id(board_id)
-  print(board)
+  board = board_schema.dump(board).data
+  board['todo'] = []
+  board['inprogress'] = []
+  board['done'] = []
+  for e in board['board_elements']:
+    print(element_schema.dump(e).data)
   return jsonify({
     'success':True,
     'data': {
