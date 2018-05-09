@@ -1,4 +1,5 @@
 from . import *
+from sqlalchemy.orm import backref
 
 class Board(Base):
   __tablename__ = 'boards'
