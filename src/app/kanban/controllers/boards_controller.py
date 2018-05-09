@@ -62,7 +62,6 @@ def boards_create_element():
   description = request.args.get('description')
   category = request.args.get('category')
   element = boards_dao.create_element(board_id, description, category)
-  print('OKAYY', element.board_id)
   element = element_schema.dump(element).data
   element['board_id'] = board['elements'] 
   element['tags'] = []
@@ -76,4 +75,8 @@ def boards_create_element():
 
 @kanban.route('/board_elements', methods=['DELETE'])
 def boards_delete_element():
-  pass
+  element_id = request.args.get('board_element_id')
+  baords_dao.delete_element(element_id)
+  return jsonify({
+    'success':True
+  })
