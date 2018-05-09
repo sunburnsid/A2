@@ -64,7 +64,7 @@ def boards_create_element():
   element = boards_dao.create_element(board_id, description, category)
   print('OKAYY', element.board_id)
   element = element_schema.dump(element).data
-  element['board_id'] = board['elements'] 
+  element['board_id'] = element['elements'] 
   element['tags'] = []
   del element['elements']
   return jsonify({
