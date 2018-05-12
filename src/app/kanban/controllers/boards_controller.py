@@ -7,9 +7,10 @@ def index_elements(board):
   board['inprogress_count'] = 0
   board['done_count'] = 0
   for e in board['board_elements']:
-    if e.category == 'todo':
+    e = element_schema.dump(e).data
+    if e['category'] == 'todo':
       board['todo_count'] += 1
-    elif e.category == 'inprogress':
+    elif e['category'] == 'inprogress':
       board['inprogress_count'] += 1
     else:
       board['done_count'] += 1
