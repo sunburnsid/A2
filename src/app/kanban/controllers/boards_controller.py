@@ -2,8 +2,18 @@ from app.constants import *
 from . import *
 from flask import jsonify
 
-def count_elements(board):
-  pass
+def index_elements(board):
+  board['todo_count'] = 0
+  board['inprogress_count'] = 0
+  board['done_count'] = 0
+  for e in board['board_elements']:
+    if e.category == 'todo':
+      board['todo_count'] += 1
+    elif e.category == 'inprogress':
+      board['inprogress_count'] += 1
+    else:
+      board['done_count'] += 1
+  return board
 
 @kanban.route('/boards', methods=['POST'])
 def boards_post():
@@ -22,8 +32,9 @@ def boards_get():
   boards = boards_dao.all_boards()
   content = []
   for board in boards:
-    content.append(board_schema.dump(board).data)
-  print(content)
+    b = board_schema.dump(board).data
+    b = index_elements(b)
+    content.append(b)
   return jsonify({
     'success':True,
     'data': {
@@ -43,11 +54,24 @@ def boards_delete():
 def boards_get_by_id(board_id):
   board = boards_dao.board_by_id(board_id)
   board = board_schema.dump(board).data
+  
   board['todo'] = []
   board['inprogress'] = []
   board['done'] = []
+  
   for e in board['board_elements']:
-    print(element_schema.dump(e).data)
+    element = element_schema.dump(e).data
+    element['board_id'] = element['elements'] 
+    element['tags'] = []
+    del element['elements']
+    
+    if element['category'] == 'todo':
+      board['todo'].append(element)
+    elif element['category'] == 'inprogress':
+      board['inprogress'].append(element)
+    else:
+      board['done'].append(element)
+  
   del board['board_elements']
   return jsonify({
     'success':True,
