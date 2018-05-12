@@ -57,6 +57,10 @@ def create_element(board_id, description, category):
     db.session.rollback() # rollback the session if there was an exception
     return e
 
+def get_element_by_id(element_id):
+  element = Element.query.filter_by(id=element_id).first()
+  return element
+
 def delete_element(element_id):
   element = Element.query.filter_by(id=element_id).first()
   db.session.delete(element)

@@ -7,10 +7,11 @@ def index_elements(board):
   board['inprogress_count'] = 0
   board['done_count'] = 0
   for e in board['board_elements']:
-    e = element_schema.dump(e).data
-    if e['category'] == 'todo':
+    element = boards_dao.get_element_by_id(e)
+    element = element_schema.dump(element).data
+    if element['category'] == 'todo':
       board['todo_count'] += 1
-    elif e['category'] == 'inprogress':
+    elif element['category'] == 'inprogress':
       board['inprogress_count'] += 1
     else:
       board['done_count'] += 1
@@ -61,7 +62,8 @@ def boards_get_by_id(board_id):
   board['done'] = []
   
   for e in board['board_elements']:
-    element = element_schema.dump(e).data
+    element = boards_dao.get_element_by_id(e)
+    element = element_schema.dump(element).data
     element['board_id'] = element['elements'] 
     element['tags'] = []
     del element['elements']
