@@ -107,3 +107,11 @@ def boards_delete_element():
   return jsonify({
     'success':True
   })
+
+@kanban.route('/board_elements/advance', methods=['POST'])
+def boards_advance_element():
+  element_id = request.args.get('board_element_id')
+  boards_dao.advance_element(element_id)
+  return jsonify({
+    'success':True
+  })

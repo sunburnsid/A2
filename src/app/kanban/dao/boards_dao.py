@@ -70,3 +70,18 @@ def delete_element(element_id):
   except Exception as e:
     db.session.rollback() # rollback the session if there was an exception
     return e
+
+def advance_element(element_id):
+  element = Element.query.filter_by(id=element_id).first()
+  if element.category == 'todo':
+    element.category = 'inprogress'
+    element.updated_at = db.func.current_timestamp()
+  elif element.category == 'inprogress':
+    element.category = 'done'
+    element.updated_at = db.func.current_timestamp()
+  try:
+    db.session.commit() # push this session to the DB
+    return True
+  except Exception as e:
+    db.session.rollback() # rollback the session if there was an exception
+    return e
